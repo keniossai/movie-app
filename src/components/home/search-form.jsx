@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { searchMovie, fetchMovies } from '../../actions/search-actions'
+import { searchMovie, fetchMovies, setLoading } from '../../actions/search-actions'
 
 export class SearchForm extends Component {
     onChange = e => {
@@ -10,7 +10,8 @@ export class SearchForm extends Component {
   
     onSubmit = event => {
       event.preventDefault();
-      this.props.fetchMovies(this.props.text);
+      this.props.fetchMovies(this.props.text)
+      this.props.setLoading()
      };
   
     render() {
@@ -28,8 +29,8 @@ export class SearchForm extends Component {
                 placeholder="Search Movies, TV Series ..."
                 onChange={this.onChange}
               />
-              <button type="submit" className="btn btn-primary btn-bg mt-3">
-                Search
+              <button type="submit" className="btn btn-danger btn-bg mt-3">
+                Search movie
               </button>
             </form>
           </div>
@@ -44,5 +45,5 @@ export class SearchForm extends Component {
   
   export default connect(
     mapStateToProps,
-    { searchMovie, fetchMovies }
+    { searchMovie, fetchMovies, setLoading }
   )(SearchForm);
